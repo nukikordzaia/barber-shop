@@ -9,7 +9,7 @@ export default function RegistrationBarber(props) {
     return (
         <div className='px-20'>
             <div className='flex flex-col py-2'>
-                <label>Last Name</label>
+                <label>E-mail</label>
                 <input className='border p-2' type="text"/>
             </div>
             <div className='flex flex-col py-2'>

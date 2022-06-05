@@ -19,13 +19,13 @@ export default function Home() {
                 <img className='w-full h-full object-cover' src={loginImg} alt=""/>
             </div>
             <div className='flex flex-col justify-center'>
-                <form className='max-w-[600px] w-full mx-auto bg-gray-100 p-4'>
+                <div className='max-w-[600px] w-full mx-auto bg-gray-100 p-4'>
                     <h2 className='text-4xl font-bold text-center py-6'>BARBER SHOP</h2>
                     { formState === 'login' && <Login formState={formState} onClick={changeForm}/> }
                     { formState === 'registration' && <Registration formState={formState} onClick={changeForm}/> }
                     { formState === 'registrationBarber' && <RegistrationBarber formState={formState} onClick={changeForm}/> }
                     { formState === 'registrationConsumer' && <RegistrationConsumer formState={formState} onClick={changeForm}/> }
-                </form>
+                </div>
             </div>
         </div>
     )
