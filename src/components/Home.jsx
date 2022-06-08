@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import loginImg from '../assets/barber-shop.jpg'
-import RegistrationConsumer from "./RegistrationConsumer";
-import Login from "./Login";
-import RegistrationBarber from "./RegistrationBarber";
-import Registration from "./Registration";
+import RegistrationConsumer from "./registration/RegistrationConsumer";
+import Login from "./registration/Login";
+import RegistrationBarber from "./registration/RegistrationBarber";
+import Registration from "./registration/Registration";
+import BarberItem from "./barberShop/BarberItem";
+import BarberShop from "./barberShop/BarberShop";
 
 export default function Home() {
 
@@ -14,6 +16,8 @@ export default function Home() {
     }
 
     return (
+        // <BarberShop/>
+
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
                 <img className='w-full h-full object-cover' src={loginImg} alt=""/>
