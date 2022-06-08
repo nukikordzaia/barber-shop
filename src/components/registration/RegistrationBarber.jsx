@@ -1,8 +1,14 @@
 import React, {useEffect, useState} from 'react'
+import dataDB from "../../databaseData/dataDB";
 
 export default function RegistrationBarber(props) {
     const initValues = {
+        role: "barber",
+        firstName: "",
+        lastName: "",
         email: "",
+        address: "",
+        price: "",
         password: "",
         repeatPassword: ""
     };
@@ -13,7 +19,6 @@ export default function RegistrationBarber(props) {
     function changeForm() {
         props.onClick('login');
     }
-
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -27,19 +32,30 @@ export default function RegistrationBarber(props) {
     }
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            console.log(formValues);
+            dataDB.push(formValues);
         }
     }, [formErrors]);
 
     const validate = (values) => {
         const errors = {}
         const regex = /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/;
+        if (!values.firstName) {
+            errors.firstName = "first name is required!"
+        }
+        if (!values.lastName) {
+            errors.lastName = "last name is required!"
+        }
         if (!values.email) {
             errors.email = "email is required!"
         } else if (!regex.test(values.email)) {
             errors.email = "this is not a valid email format!"
+        }
+        if (!values.address) {
+            errors.address = "address is required!"
+        }
+        if (!values.price) {
+            errors.price = "price is required!"
         }
         if (!values.password) {
             errors.password = "password is required!"
@@ -56,12 +72,36 @@ export default function RegistrationBarber(props) {
 
     return (
         <div className='px-20'>
+            <div className='flex flex-col pt-2 '>
+                <label>First Name</label>
+                <input className='border p-2' type='text' name='firstName' value={formValues.firstName}
+                       onChange={handleChange}/>
+            </div>
+            <p className='text-red-600 text-sm text-right'>{formErrors.firstName}</p>
+            <div className='flex flex-col pt-2'>
+                <label>Last Name</label>
+                <input className='border p-2' type="text" name='lastName' value={formValues.lastName}
+                       onChange={handleChange}/>
+            </div>
+            <p className='text-red-600 text-sm text-right'>{formErrors.lastName}</p>
             <div className='flex flex-col pt-2'>
                 <label>E-mail</label>
                 <input className='border p-2' type="text" name='email' value={formValues.email}
                        onChange={handleChange}/>
             </div>
             <p className='text-red-600 text-sm text-right'>{formErrors.email}</p>
+            <div className='flex flex-col pt-2'>
+                <label>Adress</label>
+                <input className='border p-2' type="text" name='address' value={formValues.address}
+                       onChange={handleChange}/>
+            </div>
+            <p className='text-red-600 text-sm text-right'>{formErrors.address}</p>
+            <div className='flex flex-col pt-2'>
+                <label>Price</label>
+                <input className='border p-2' type="number" name='price' value={formValues.price}
+                       onChange={handleChange}/>
+            </div>
+            <p className='text-red-600 text-sm text-right'>{formErrors.price}</p>
             <div className='flex flex-col pt-2'>
                 <label>Password</label>
                 <input className='border p-2' type="password" name='password' value={formValues.password}

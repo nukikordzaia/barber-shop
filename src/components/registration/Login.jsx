@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import dataDB from "../../databaseData/dataDB";
 
 export default function Login(props) {
     const initValues = {
@@ -25,11 +26,39 @@ export default function Login(props) {
     }
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            console.log(formValues);
+            login();
         }
     }, [formErrors]);
+
+    const login = () => {
+        if (dataDB.length === 0) {
+            console.log("you are not registered");
+        } else {
+            const userMail = formValues.email;
+            const userPass = formValues.password;
+            const currentUser = [];
+            const consumerData = dataDB.find(user => user.role === "consumer");
+            const barberData = dataDB.find(user => user.role === "barber")
+            if (consumerData) {
+                currentUser.push(consumerData);
+                if (currentUser.find(consumer => consumer.email === userMail && consumer.password === userPass)) {
+                    console.log("you logged in");
+                } else if (currentUser.find(consumer => consumer.email === userMail && consumer.password !== userPass)) {
+                    console.log("password is incorrect");
+                }
+            } else if (barberData) {
+                currentUser.push(barberData);
+                if (currentUser.find(barber => barber.email === userMail && barber.password === userPass)) {
+                    console.log("you can't log in, you are barber");
+                } else if (currentUser.find(barber => barber.email === userMail && barber.password !== userPass)) {
+                    console.log("password is incorrect");
+                }
+            } else {
+                console.log("you are not registered");
+            }
+        }
+    }
 
     const validate = (values) => {
         const errors = {}
