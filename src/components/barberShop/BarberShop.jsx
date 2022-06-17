@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import data from "../../databaseData/dataDB";
+import barberDBData from "../../databaseData/barberDB";
 import BarberItem from "./BarberItem";
 
 
 function BarberShop(props) {
 
-    const [barberData, setBarberData] = useState(data);
+    const [barberData, setBarberData] = useState(barberDBData);
 
     function changeForm(value) {
         props.onClick(value);
