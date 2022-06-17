@@ -30,6 +30,7 @@ export default function RegistrationBarber(props) {
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
             dataDB.push(formValues);
+            window.alert("you successfully registered")
         }
     }, [formErrors]);
 

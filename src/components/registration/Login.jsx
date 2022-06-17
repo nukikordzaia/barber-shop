@@ -10,8 +10,8 @@ export default function Login(props) {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
 
-    function changeForm() {
-        props.onClick('registration');
+    function changeForm(value) {
+        props.onClick(value);
     }
 
     const handleChange = (e) => {
@@ -43,19 +43,19 @@ export default function Login(props) {
             if (consumerData) {
                 currentUser.push(consumerData);
                 if (currentUser.find(consumer => consumer.email === userMail && consumer.password === userPass)) {
-                    console.log("you logged in");
+                    changeForm("barberShop")
                 } else if (currentUser.find(consumer => consumer.email === userMail && consumer.password !== userPass)) {
-                    console.log("password is incorrect");
+                    window.alert("password is incorrect");
                 }
             } else if (barberData) {
                 currentUser.push(barberData);
                 if (currentUser.find(barber => barber.email === userMail && barber.password === userPass)) {
-                    console.log("you can't log in, you are barber");
+                    window.alert("you can't log in, you are barber");
                 } else if (currentUser.find(barber => barber.email === userMail && barber.password !== userPass)) {
-                    console.log("password is incorrect");
+                   window.alert("password is incorrect");
                 }
             } else {
-                console.log("you are not registered");
+                window.alert("you are not registered");
             }
         }
     }
@@ -92,7 +92,7 @@ export default function Login(props) {
                     onClick={handleSubmit}>Log In
             </button>
             <div className='flex justify-between'>
-                <button className='w-40 text-left text-sky-800' onClick={changeForm}>Create an account</button>
+                <button className='w-40 text-left text-sky-800' onClick={e => {changeForm("registration")}}>Create an account</button>
             </div>
         </div>
     )
