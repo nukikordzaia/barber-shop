@@ -1,18 +1,27 @@
-import { useState } from 'react'
+import React, {useState} from 'react'
 import data from "../../databaseData/dataDB";
 import BarberItem from "./BarberItem";
 
 
+function BarberShop(props) {
 
-function BarberShop() {
+    const [barberData, setBarberData] = useState(data);
 
-    const [barberData, setBarberData] = useState(data)
+    function changeForm(value) {
+        props.onClick(value);
+    }
 
     return (
-        <div className="w-full h-screen bg-slate-500 flex flex-wrap">
-            {barberData.map(barber => (
-                <BarberItem key={barber.id} {...barber} />
-            ))}
+        <div>
+            <div className="w-full h-screen bg-sky-100 flex flex-wrap">
+                {barberData.map(barber => (
+                    <BarberItem key={barber.id} {...barber} />
+                ))}
+                <button className='bg-blue-500 h-10 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4' onClick={e => {
+                    changeForm("login")
+                }}>Log out
+                </button>
+            </div>
         </div>
     );
 }
