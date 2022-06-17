@@ -1,3 +1,3 @@
 const dataDB = [];
 
-export default dataDB
+export default dataDB;

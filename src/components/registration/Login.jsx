@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import dataDB from "../../databaseData/dataDB";
+import barberDB from "../../databaseData/barberDB";
 
 export default function Login(props) {
     const initValues = {
@@ -32,14 +33,14 @@ export default function Login(props) {
     }, [formErrors]);
 
     const login = () => {
-        if (dataDB.length === 0) {
+        if (dataDB.length === 0 && barberDB.length === 0) {
             console.log("you are not registered");
         } else {
             const userMail = formValues.email;
             const userPass = formValues.password;
             const currentUser = [];
             const consumerData = dataDB.find(user => user.role === "consumer");
-            const barberData = dataDB.find(user => user.role === "barber")
+            const barberData = barberDB.find(user => user.role === "barber")
             if (consumerData) {
                 currentUser.push(consumerData);
                 if (currentUser.find(consumer => consumer.email === userMail && consumer.password === userPass)) {

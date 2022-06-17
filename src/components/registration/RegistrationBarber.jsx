@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import dataDB from "../../databaseData/dataDB";
+import barberDB from "../../databaseData/barberDB";
 
 export default function RegistrationBarber(props) {
     const initValues = {
@@ -33,7 +33,7 @@ export default function RegistrationBarber(props) {
 
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            dataDB.push(formValues);
+            barberDB.push(formValues);
             window.alert("you successfully registered")
         }
     }, [formErrors]);
